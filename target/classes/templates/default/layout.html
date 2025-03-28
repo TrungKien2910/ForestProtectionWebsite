@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ulatraq.net.nz/thymeleaf/layout">
+<head>
+    <title>Spring Boot Layout</title>
+</head>
+<body>
+<!-- Header -->
+<section sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SYSTEM')" th:replace="/admin/admin-header"></section>
+<section sec:authorize="!hasAnyRole('ROLE_ADMIN', 'ROLE_SYSTEM')" th:replace="/default/header"></section>
+
+
+<!-- Main Content -->
+
+<section layout:fragment="main-content"></section>
+
+
+
+<!-- Footer -->
+
+<section sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_SYSTEM')" th:include="admin/admin-footer"></section>
+<section sec:authorize="!hasAnyRole('ROLE_ADMIN', 'ROLE_SYSTEM')" th:unless="${isHomePage}" th:include="default/footer"></section>
+
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Page</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @font-face {
+            font-family: 'FuturaPT';
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="font-['FuturaPT'] text-[#456866] bg-[#f4f4f4] m-0 p-0">
+<section layout:fragment="main-content">
+    <div class="blog-container max-w-[1500px] mx-auto my-5 p-5 bg-white rounded-lg shadow-md relative">
+        <div class="blog-header flex justify-between items-center">
+            <h2 class="text-2xl font-bold">Danh sách bài viết về bảo vệ rừng</h2>
+            <button onclick="window.location.href='/blogs/blog-form-insert'"
+                    class="add-btn bg-[#456866] text-white px-4 py-2 rounded-md cursor-pointer text-base border-none hover:bg-[#365050]">
+                <i  class="fas fa-plus"></i> Tạo bài viết
+            </button>
+        </div>
+        <div th:each="blog : ${blogs}" class="blog-list mt-5" th:attr="onclick=|window.location.href='@{/blogs/blog(id=${blog.blogId})}'|">
+            <!-- Blog Item 1 -->
+            <div class="blog-item p-[50px] rounded-[20px] border-b border-[#ddd] last:border-b-0">
+                <div class="blog-title text-3xl font-bold hover:text-[#2c5f2d] hover:scale-[1.05] hover:cursor-pointer transition-transform">
+                    <a th:text="${blog.title}"></a>
+                </div>
+                <div class="blog-user text-lg text-[#777]">
+                    Viết bởi: <span th:text="${blog.username}"></span>
+                    <div >
+                        Time: <span class="mt-2 text-sm text-gray-500 italic" th:text="${blog.createdAt}"></span>
+                </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+</body>
+</html>

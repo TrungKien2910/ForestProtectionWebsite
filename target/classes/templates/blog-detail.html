@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Detail Page</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @font-face {
+            font-family: 'FuturaPT';
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="font-['FuturaPT'] text-[#456866] bg-[#f4f4f4] m-0 p-0">
+<section layout:fragment="main-content">
+    <div class="blog-container max-w-4xl mx-auto my-8 p-6 bg-white rounded-xl shadow-lg">
+        <div class="blog-list">
+            <div class="blog-item p-8 rounded-2xl">
+                <!-- Title Section -->
+                <h1 class="blog-title text-4xl font-bold mb-6 text-[#2c5f2d] leading-tight">
+                    <span th:text="${blog.title}"></span>
+                </h1>
+
+                <!-- Author & Date Section -->
+                <div class="blog-user mb-8">
+                    <div class="text-lg font-medium text-[#668586]">
+                        Viết bởi: <span th:text="${blog.username}" class="font-semibold"></span>
+                    </div>
+                    <div class="mt-2 text-sm text-[#88a2a3] italic">
+                        <span th:text="${blog.createdAt}"></span>
+                    </div>
+                </div>
+
+                <!-- Content Section -->
+                <article class="blog-content prose lg:prose-xl max-w-none">
+                    <p class="text-lg leading-relaxed text-gray-700 text-justify"
+                       th:text="${blog.content}"
+                       style="line-height: 1.8;">
+                    </p>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

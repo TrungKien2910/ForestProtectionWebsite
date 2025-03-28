@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Forest Guard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'custom-green': '#628a88',
+                        'custom-text-green': '#6b8f71',
+                        'nav-color': '#336666'
+                    },
+                    fontFamily: {
+                        'futura': ['FuturaPT', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.adobe.com/libraries/1AO0QOLGNRBTPSV3QUEKKOOJQXNEFF">
+</head>
+<body class="font-futura">
+
+<header class="bg-white shadow-md">
+    <div class="container mx-auto flex justify-between items-center py-4 px-6">
+        <!-- Logo -->
+        <div class="flex items-center">
+            <img alt="Forest Guard Logo" class="h-12 w-auto" th:src="@{/default/images/logo.png}"/>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="flex space-x-8">
+            <a class="text-nav-color font-medium pb-1 relative transition-colors duration-300 hover:text-custom-text-green
+                     after:content-[''] after:absolute after:-bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-full after:h-0.5 after:bg-custom-text-green"
+               th:href="@{/}">Home</a>
+            <a class="text-nav-color font-medium pb-1 relative transition-colors duration-300 hover:text-custom-text-green"
+               th:href="@{/schedules/list-schedule}">Schedule</a>
+            <a class="text-nav-color font-medium pb-1 relative transition-colors duration-300 hover:text-custom-text-green"
+               th:href="@{/events/list-event}">Event</a>
+            <a class="text-nav-color font-medium pb-1 relative transition-colors duration-300 hover:text-custom-text-green"
+               th:href="@{/blogs/list-blog}">Blog</a>
+        </nav>
+
+        <div class="flex flex-col items-end space-y-2">
+            <!-- Hàng ngang: Support, User, Menu -->
+            <div class="flex items-center space-x-6">
+                <!-- Nút Support -->
+                <button class="bg-custom-green text-white px-4 py-2 rounded-lg flex items-center shadow-md hover:opacity-90 transition">
+                    <i class="fas fa-comment-alt mr-2"></i> Support
+                </button>
+
+                <!-- Icon User -->
+                <div class="relative inline-block text-left" id="userMenuContainer">
+                    <!-- Icon User -->
+                    <img alt="User"
+                         class="h-6 w-6 cursor-pointer"
+                         th:src="@{/default/images/user.png}"
+                         onclick="toggleUserMenu()"
+                         sec:authorize="isAuthenticated()" />
+
+                    <!-- Nếu chưa đăng nhập thì chuyển về trang login -->
+                    <img alt="User"
+                         class="h-6 w-6 cursor-pointer"
+                         th:src="@{/default/images/user.png}"
+                         onclick="window.location.href='/login'"
+                         sec:authorize="isAnonymous()" />
+
+                    <!-- Dropdown Menu -->
+                    <div id="userMenu"
+                         class="hidden absolute right-0 mt-2 w-40 bg-white border rounded-lg shadow-lg z-50 text-sm">
+                        <a href="/change-password" class="block px-4 py-2 hover:bg-gray-100">Đổi mật khẩu</a>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="w-full text-left px-4 py-2 hover:bg-gray-100">Đăng xuất</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Icon Menu -->
+                <img alt="Menu" class="h-6 w-6" th:src="@{/default/images/menu.png}" />
+            </div>
+
+            <div sec:authorize="isAuthenticated()">
+                <p class="text-sm text-gray-700">
+                    Xin chào: <span sec:authentication="name"></span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+</header>
+
+<script>
+    function toggleUserMenu() {
+        const menu = document.getElementById("userMenu");
+        menu.classList.toggle("hidden");
+    }
+
+    // Ẩn menu nếu click ra ngoài
+    document.addEventListener('click', function (event) {
+        const userMenuContainer = document.getElementById('userMenuContainer');
+        const userMenu = document.getElementById('userMenu');
+        if (!userMenuContainer.contains(event.target)) {
+            userMenu.classList.add('hidden');
+        }
+    });
+</script>
+
+
+</body>
+</html>

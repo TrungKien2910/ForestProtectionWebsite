@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Detail Page</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @font-face {
+            font-family: 'FuturaPT';
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="font-['FuturaPT'] text-[#456866] text-center bg-[#f0f0f0] m-0 p-0">
+<section layout:fragment="main-content">
+    <div class="event-section flex flex-col items-center w-full">
+
+        <!-- Sự kiện -->
+        <div
+             class="event-container my-8 mx-auto rounded-[30px] w-[90%] max-w-[1200px] bg-white border-b-2 border-[#456866] shadow-md p-8">
+
+            <!-- Hình ảnh sự kiện -->
+            <img class="event-img rounded-[30px] w-full h-[450px] object-cover mb-6" th:src="${event.img}" alt="Event Image">
+
+            <!-- Tiêu đề sự kiện -->
+            <h1 class="event-name text-[40px] font-bold text-[#2C3E50]" th:text="${event.eventName}"></h1>
+
+            <!-- Slogan -->
+            <p class="event-slogan text-[22px] italic my-[10px] text-gray-600" th:text="${event.slogan}"></p>
+
+            <!-- Thông tin sự kiện -->
+            <div class="event-details text-[18px] my-6">
+                <p class="my-[8px] flex items-center justify-center">
+                    <i class="fas fa-map-marker-alt text-[#456866] mr-3"></i>
+                    <strong>Location:</strong> <span class="ml-2" th:text="${event.location}"></span>
+                </p>
+                <p class="my-[8px] flex items-center justify-center">
+                    <i class="fas fa-clock text-[#456866] mr-3"></i>
+                    <strong>Time:</strong>
+                    <span th:text="${#temporals.format(event.startTime, 'yyyy-MM-dd HH:mm')}"></span> -
+                    <span th:text="${#temporals.format(event.endTime, 'yyyy-MM-dd HH:mm')}"></span>
+                </p>
+            </div>
+
+            <!-- Mô tả sự kiện -->
+            <div class="event-description text-[18px] text-left leading-8 px-5 md:px-10">
+                <p class="mb-4 text-justify text-gray-700" th:text="${event.description}"></p>
+            </div>
+
+            <!-- Xem chi tiết lịch trình -->
+            <div class="mt-6">
+                <a th:href="@{/schedules/schedule(id=${event.eventId})}"
+                   class="text-[#2980B9] text-[20px] underline font-semibold hover:text-[#1F618D] transition duration-300">
+                    Xem chi tiết lịch trình
+                </a>
+            </div>
+
+            <!-- Nút Join Now & Donate -->
+            <div class="mt-10 flex flex-col md:flex-row gap-5 justify-center">
+                <a th:href="@{/events/join(id=${event.eventId})}"
+                   class="bg-[#27AE60] text-white text-[22px] font-bold py-3 px-6 rounded-full shadow-lg hover:bg-[#219150] transition duration-300">
+                    Join Now
+                </a>
+                <a th:href="@{/events/donate(id=${event.eventId})}"
+                   class="bg-[#E74C3C] text-white text-[22px] font-bold py-3 px-6 rounded-full shadow-lg hover:bg-[#C0392B] transition duration-300">
+                    Donate
+                </a>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

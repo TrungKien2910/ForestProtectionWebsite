@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Blog Page</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @font-face {
+            font-family: 'FuturaPT';
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="main-content" class="text-[#456866] text-center py-10">
+    <h1 class="text-3xl font-bold">Xin chào, Admin!</h1>
+    <p class="mt-4 text-lg">Chào mừng bạn đến với trang quản trị. Hãy quản lý hệ thống một cách hiệu quả!</p>
+</section>
+
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule Page</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @font-face {
+            font-family: 'FuturaPT';
+        }
+    </style>
+</head>
+<body class="font-['FuturaPT'] text-[#456866] text-center bg-[#f0f0f0] m-0 p-0">
+<section layout:fragment="main-content">
+    <div class="event-section flex flex-wrap justify-center p-5">
+        <div th:each="event : ${events}" class="event-container w-[90%] max-w-[800px] m-5 p-5 border-2 border-[#456866] rounded-lg bg-white shadow-md"
+             th:attr="onclick=|window.location.href='@{/schedules/schedule(id=${event.eventId})}'|">
+            <img class="event-img w-full rounded-lg h-[300px] object-cover"
+                 th:src="${event.img}"
+                 alt="Event Image">
+            <div th:text="${event.eventName}" class="event-name text-[28px] font-bold mt-2.5">Spring Music Festival</div>
+            <div th:text="${event.slogan}" class="event-slogan text-[20px] italic my-2.5">"Feel the Rhythm of Spring"</div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

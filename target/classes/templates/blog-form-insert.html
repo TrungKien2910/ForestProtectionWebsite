@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Blog</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @font-face {
+            font-family: 'FuturaPT';
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="font-['FuturaPT'] text-[#456866] bg-[#f4f4f4] m-0 p-0">
+<section layout:fragment="main-content">
+    <div class="container max-w-4xl mx-auto my-8 p-6 bg-white rounded-xl shadow-lg">
+        <h1 class="text-4xl font-bold mb-8 text-[#2c5f2d]">Viết bài mới</h1>
+
+        <form th:action="@{/blogs/add}" method="POST" class="space-y-6">
+            <!-- Title Input -->
+            <div>
+                <label for="title" class="block text-lg font-medium text-[#668586] mb-2">Tiêu đề</label>
+                <input type="text"
+                       id="title"
+                       name="title"
+                       required
+                       class="w-full p-3 border-2 border-[#88a2a3] rounded-lg focus:ring-2 focus:ring-[#2c5f2d] focus:border-[#2c5f2d] outline-none transition-all"
+                       placeholder="Nhập tiêu đề bài viết">
+            </div>
+
+            <!-- Content Input -->
+            <div>
+                <label for="content" class="block text-lg font-medium text-[#668586] mb-2">Nội dung</label>
+                <textarea id="content"
+                          name="content"
+                          rows="10"
+                          required
+                          class="w-full p-3 border-2 border-[#88a2a3] rounded-lg focus:ring-2 focus:ring-[#2c5f2d] focus:border-[#2c5f2d] outline-none transition-all"
+                          placeholder="Viết nội dung của bạn ở đây..."></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                    class="w-full bg-[#2c5f2d] text-white py-3 px-6 rounded-lg text-lg font-semibold hover:bg-[#245a25] transition-colors duration-300">
+                Đăng bài
+            </button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

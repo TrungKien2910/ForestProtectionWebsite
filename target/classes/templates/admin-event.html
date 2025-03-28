@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Event Page</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @font-face {
+            font-family: 'FuturaPT';
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+<section layout:fragment="main-content" class="text-[#456866] p-6">
+    <h1 class="text-3xl font-bold text-center mb-6">Danh sách sự kiện</h1>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border border-gray-300 shadow-md rounded-lg">
+            <thead>
+            <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                <th class="py-3 px-6 text-left">ID</th>
+                <th class="py-3 px-6 text-left">Tên sự kiện</th>
+                <th class="py-3 px-6 text-left">Khẩu hiệu</th>
+                <th class="py-3 px-6 text-left">Địa điểm</th>
+                <th class="py-3 px-6 text-left">Thời gian</th>
+                <th class="py-3 px-6 text-left">Mô tả</th>
+                <th class="py-3 px-6 text-left">Hành động</th>
+            </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm">
+            <tr th:each="event : ${events}" class="border-b border-gray-300 hover:bg-gray-100">
+                <td class="py-3 px-6" th:text="${event.eventId}"></td>
+                <td class="py-3 px-6">
+                    <a th:href="@{/events/detail/{id}(id=${event.eventId})}" class="text-blue-500 hover:underline" th:text="${event.eventName}"></a>
+                </td>
+                <td class="py-3 px-6" th:text="${event.slogan}"></td>
+                <td class="py-3 px-6" th:text="${event.location}"></td>
+                <td class="py-3 px-6">
+                    <span th:text="${#temporals.format(event.startTime, 'dd/MM/yyyy HH:mm')}"></span> -
+                    <span th:text="${#temporals.format(event.endTime, 'dd/MM/yyyy HH:mm')}"></span>
+                </td>
+                <td class="py-3 px-6">
+                    <span th:text="${#strings.length(event.description) > 100 ? #strings.substring(event.description, 0, 100) + '...' : event.description}"></span>
+                    <a th:href="@{/events/detail/{id}(id=${event.eventId})}" class="text-blue-500 hover:underline">
+                        Xem chi tiết
+                    </a>
+                </td>
+                <td class="py-3 px-6">
+                    <a th:href="@{/events/edit/{id}(id=${event.eventId})}" class="text-green-500 hover:underline mr-2">
+                        Sửa
+                    </a>
+                    <a th:href="@{/events/delete/{id}(id=${event.eventId})}" class="text-red-500 hover:underline"
+                       onclick="return confirm('Bạn có chắc chắn muốn xóa sự kiện này?')">
+                        Xóa
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+</body>
+</html>

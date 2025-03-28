@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default/layout}">
+<head>
+    <title>Forest Guard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script th:src="@{default/js/home.js}"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @font-face {
+            font-family: 'FuturaPT';
+        }
+    </style>
+</head>
+<body class="font-['FuturaPT'] bg-[#f5f7f6]">
+<th:block th:with="isHomePage=${isHomePage}">
+    <section layout:fragment="main-content">
+
+        <div class="container relative flex items-center justify-between w-screen max-w-none">
+            <!-- Left Column: Leaf Image & Share Button -->
+            <div class="image-container relative w-[90%]">
+                <img th:src="@{default/images/caila3.png}" alt="Leaf Image" class="w-[925px]">
+                <div class="share-container absolute bottom-0">
+                    <img th:src="@{/default/images/share.png}" alt="Share Button" class="w-[210px] h-[130px] cursor-pointer">
+                </div>
+            </div>
+
+            <!-- Middle Column: Content -->
+            <div class="content max-w-[1200px] text-center mr-[90px] mb-[30px]">
+                <h1 class="text-[50px] font-bold text-[#456866]">DISCOVER THE <span class="text-[#456866] text-[150px] font-black">FOREST</span></h1>
+                <h2 id="sub-title" class="text-[35px] font-medium text-[#456866]">Join Hands to Protect Environment</h2>
+                <p id="main-text" class="text-[24px] text-[#456866] my-[20px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+
+                <!-- JOIN and DONATE Buttons -->
+                <div class="btn-container flex justify-center">
+                    <button class="btn m-[20px] py-[12px] px-[24px] rounded-[8px] text-[20px] cursor-pointer text-center uppercase bg-[#628a88] text-white border-none" onclick="window.location.href='/schedule'">JOIN NOW</button>
+                    <button class="btn m-[20px] py-[12px] px-[24px] rounded-[8px] text-[20px] cursor-pointer text-center uppercase bg-[#628a88] text-white border-none" onclick="window.location.href='/event'">DONATE</button>
+                </div>
+            </div>
+
+            <!-- Right Column: Up and Down Buttons -->
+            <div class="button-container flex flex-col gap-[20px]">
+                <img class="button-up mr-[100px] w-[50px] cursor-pointer" th:src="@{default/images/buttonup.png}" alt="Button Up">
+                <img class="button-down mr-[100px] w-[50px] cursor-pointer" th:src="@{default/images/buttondown.png}" alt="Button Down">
+            </div>
+
+            <div class="right-bottom-container absolute bottom-0 right-0 flex flex-col items-end gap-[15px]">
+                <div class="question-container mr-[120px] absolute bottom-0 w-[800px] h-[130px] bg-[#628a88] rounded-[60px] text-center p-[15px] text-white">
+                    <h3 class="text-[20px] text-[#f6f8f8] inline-block border-b border-white pb-[5px]">HOW IT'S WORK?</h3>
+                    <p class="text-[18px] text-[#f6f8f8] font-light no-underline mr-[15px] pr-[50px]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do</p>
+                    <p class="text-[18px] text-[#f6f8f8] font-light no-underline mr-[15px] pr-[50px]">eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+
+                <div class="social-container h-[130px] items-center absolute bottom-0 flex gap-[15px] p-[20px] bg-[#456866]">
+                    <a href="#" class="text-white text-[24px] no-underline"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-white text-[24px] no-underline"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-white text-[24px] no-underline"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white text-[24px] no-underline"><i class="fab fa-youtube"></i></a>
+                </div>
+
+                <div class="imghoa-container mb-[70px]">
+                    <img th:src="@{default/images/hoa.png}" alt="hoa" class="w-[200px]">
+                </div>
+            </div>
+        </div>
+
+    </section>
+</th:block>
+</body>
+</html>

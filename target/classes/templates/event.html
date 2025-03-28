@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{default/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Page</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- Add Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @font-face {
+            font-family: 'FuturaPT';
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="font-['FuturaPT'] text-[#456866] text-center bg-[#f0f0f0] m-0 p-0">
+<section layout:fragment="main-content">
+    <div class="event-section flex flex-col w-full">
+        <div th:each="event : ${events}" class="event-container my-5 mx-5 rounded-[30px] w-[98%] flex items-center justify-between bg-white border-b-2 border-[#456866] shadow-md"
+             th:attr="onclick=|window.location.href='@{/events/event(id=${event.eventId})}'|">
+            <img class="event-img rounded-[30px] w-[30%] h-[400px] object-cover" th:src="${event.img}" alt="Event Image">
+            <div class="event-content w-[70%] p-5 text-left">
+                <div class="event-name text-[32px] font-bold" th:text="${event.eventName}"></div>
+                <div class="event-slogan text-[22px] italic my-[10px]" th:text="${event.slogan}"></div>
+                <div class="event-details text-[18px] mt-[10px]">
+                    <p class="my-[5px]"><i class="fas fa-map-marker-alt text-[#456866] mr-2"></i><strong>Location:</strong> <span th:text="${event.location}"></span></p>
+                    <p class="my-[5px]"><i class="fas fa-clock text-[#456866] mr-2"></i><strong>Time:</strong> <span th:text="${#temporals.format(event.startTime, 'yyyy-MM-dd HH:mm')}"></span>
+                    - <span th:text="${#temporals.format(event.endTime, 'yyyy-MM-dd HH:mm')}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
